@@ -82,6 +82,19 @@
         }
     </style>
 
+    <!-- rewrite animation -->
+    <style>
+        .rewrite-text {
+            font-weight: 700;
+            animation: blink 2.8s steps(2, start) infinite;
+        }
+
+        .rewrite-text::after {
+            content: attr(data-text);
+            visibility: hidden;
+        }
+    </style>
+
     <!-- for email send  -->
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -147,7 +160,6 @@
 
             <!-- Hero -->
             <main id="home" class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-8">
-                
                 <section class="lg:col-span-2">
                     <div class="flex items-center gap-3 group">
                         <span
@@ -239,8 +251,7 @@
 
                         <div class="mt-4 flex items-center gap-4">
                             <div class="w-20 h-20 rounded-xl overflow-hidden">
-                                <img src="images/profile.png" alt="profile"
-                                    class="w-full h-full object-cover">
+                                <img src="images/profile.png" alt="profile" class="w-full h-full object-cover">
                             </div>
                             <div>
                                 <div class="font-semibold">Abhishek Prajapati</div>
@@ -264,12 +275,11 @@
                         </div>
                     </div>
                 </aside>
-                
             </main>
 
             <!-- About -->
             <section id="about" class="p-8">
-                <h3 class="text-2xl font-semibold">About Me</h3>
+                <h3 class="text-2xl font-semibold rewrite-text">About Me</h3>
                 <p class="text-slate-600 mt-3 leading-relaxed max-w-3xl">
                     A results-driven <strong>Full Stack Developer</strong> with practical experience in designing and
                     developing dynamic web applications. Skilled in crafting responsive interfaces and robust back-end
@@ -280,7 +290,7 @@
 
                 <!-- Education -->
                 <div class="mt-8">
-                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4">Education</h4>
+                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4 rewrite-text">Education</h4>
                     <div class="space-y-4">
                         <div class="bg-white rounded-xl p-4 border card-shadow float-up">
                             <div class="flex items-center justify-between">
@@ -311,7 +321,7 @@
 
                 <!-- Internships -->
                 <div class="mt-10">
-                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4">Internships</h4>
+                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4 rewrite-text">Internships</h4>
                     <div class="space-y-4">
                         <div class="bg-white rounded-xl p-4 border card-shadow float-up">
                             <div class="flex items-center justify-between">
@@ -348,7 +358,7 @@
 
             <!-- Skills -->
             <section id="skills" class="p-8 bg-gray-50">
-                <h3 class="text-2xl font-semibold">Skills</h3>
+                <h3 class="text-2xl font-semibold rewrite-text">Skills</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-center">
                     <div
                         class="p-4 bg-white rounded-xl card-shadow float-up hover:bg-[color:var(--accent)] hover:text-white hover:shadow-xl transition-all duration-300">
@@ -390,7 +400,7 @@
 
             <!-- Portfolio -->
             <section id="portfolio" class="p-8">
-                <h3 class="text-2xl font-semibold">Featured Projects</h3>
+                <h3 class="text-2xl font-semibold rewrite-text">Projects</h3>
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
 
                     <!-- Project 1 -->
@@ -419,8 +429,8 @@
                             animations and a modern UI.
                         </p>
                         <div class="mt-4 flex gap-2">
-                            <a href=" https://akprajapati8719.github.io/Personal-Portfolio-Website/" target="_blank"
-                                class="text-sm px-3 py-2 rounded border btn-hover">Live here</a>
+                            <a href="https://github.com/AkPrajapati8719/Portfolio" target="_blank"
+                                class="text-sm px-3 py-2 rounded border btn-hover">View Repo</a>
                         </div>
                     </div>
 
@@ -543,8 +553,8 @@
 
             <!-- Contact -->
             <section id="contact" class="p-8 bg-[color:var(--glass)] rounded-b-2xl">
-                <h3 class="text-2xl font-semibold">Get in touch</h3>
-                <p class="text-slate-600 mt-2">Interested in working together? Fill in the form below.</p>
+                <h3 class="text-2xl font-semibold rewrite-text">Reach Out!</h3>
+                <p class="text-slate-600 mt-2">Have a project or idea in mind? Let’s make it happen together.</p>
 
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -613,6 +623,41 @@
         });
     </script>
 
+    <!-- rewrite animation -->
+    <script>
+        function rewriteText(element, speed = 100) {
+            const text = element.textContent.trim();
+            let i = 0;
+            let typing = true;
+
+            // Use data-text to preserve the full width of the text
+            element.setAttribute("data-text", text);
+
+            function typeEffect() {
+                if (typing) {
+                    element.textContent = text.slice(0, i++);
+                    if (i > text.length) {
+                        typing = false;
+                        setTimeout(typeEffect, 1500); // pause before deleting
+                        return;
+                    }
+                } else {
+                    element.textContent = text.slice(0, i--);
+                    if (i < 0) {
+                        typing = true;
+                        setTimeout(typeEffect, 600); // pause before typing again
+                        return;
+                    }
+                }
+                setTimeout(typeEffect, speed);
+            }
+
+            typeEffect();
+        }
+
+        // Apply to all elements with rewrite-text class
+        document.querySelectorAll('.rewrite-text').forEach(el => rewriteText(el, 100));
+    </script>
 
 
 </body>
