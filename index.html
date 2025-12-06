@@ -93,7 +93,58 @@
             content: attr(data-text);
             visibility: hidden;
         }
+
+        /* NEON BORDER ONLY (No outer halo, no inner glow) */
+        .neon-border-only {
+            position: relative;
+            border-radius: 20px;
+        }
+
+        .neon-border-only::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+
+            /* Neon gradient */
+            background: linear-gradient(120deg,
+                    #7c3aed,
+                    #ec4899,
+                    #3b82f6,
+                    #ec4899,
+                    #7c3aed);
+
+            background-size: 300% 300%;
+            animation: neonBorderMove 4s linear infinite;
+
+            /* BORDER ONLY using mask (very important) */
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+            padding: 3px;
+            /* thickness of neon border */
+        }
+
+        @keyframes neonBorderMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- for email send  -->
     <!-- EmailJS SDK -->
@@ -109,7 +160,7 @@
 
 <body class="bg-[#f7f7fb] text-slate-900 antialiased">
 
-    <div class="min-h-screen max-w-7xl mx-auto p-6">
+    <div class="min-h-screen max-w-7xl mx-auto p-6" data-aos="fade-up">
         <div class="relative">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-200 text-center select-none"
                 style="letter-spacing: .4px; margin-top: -18px;">
@@ -225,8 +276,9 @@
                     <div class="mt-6 flex flex-wrap items-center gap-6">
                         <div class="p-4 rounded-lg bg-white border text-center w-32 card-shadow float-up">
                             <div class="text-sm text-slate-500">Projects</div>
-                            <div class="text-xl font-semibold mt-1">15+</div>
+                            <div id="projectCounter" class="text-xl font-semibold mt-1">0</div>
                         </div>
+
 
                         <div class="flex flex-wrap gap-3">
                             <a class="px-5 py-3 rounded-lg text-white font-medium shadow-md btn-hover"
@@ -239,33 +291,36 @@
 
                 </section>
 
-                <aside class="lg:col-span-1">
-                    <div class="bg-white rounded-2xl p-6 card-shadow float-up">
+                <aside class="lg:col-span-1" data-aos="fade-left" data-aos-delay="200">
+                    <div class="neon-border-only bg-white rounded-2xl p-6 card-shadow float-up">
+
                         <div class="flex items-center justify-between">
                             <div>
                                 <div class="text-xs text-slate-500">Available for</div>
                                 <div class="text-sm font-semibold">Full Stack Development</div>
                             </div>
-
                         </div>
 
                         <div class="mt-4 flex items-center gap-4">
                             <div class="w-20 h-20 rounded-xl overflow-hidden">
                                 <img src="images/profile.png" alt="profile" class="w-full h-full object-cover">
                             </div>
+
                             <div>
                                 <div class="font-semibold">Abhishek Prajapati</div>
                                 <div class="text-xs text-slate-500">Computer Science Engineer</div>
                             </div>
                         </div>
 
-                        <p class="mt-4 text-sm text-slate-600">I build immersive, scalable and aesthetic web apps with
-                            modern technology stacks.</p>
+                        <p class="mt-4 text-sm text-slate-600">
+                            I build immersive, scalable and aesthetic web apps with modern technology stacks.
+                        </p>
 
                         <div class="mt-4 flex gap-2">
                             <a href="#contact"
                                 class="text-sm px-3 py-2 rounded bg-[color:var(--accent)] text-white btn-hover">Hire
                                 Me</a>
+
                             <a href="#portfolio" class="text-sm px-3 py-2 rounded border btn-hover">Portfolio</a>
                         </div>
 
@@ -273,14 +328,16 @@
                             <div>Contact</div>
                             <div class="font-medium">akprajapati8719@gmail.com</div>
                         </div>
+
                     </div>
                 </aside>
+
             </main>
 
             <!-- About -->
             <section id="about" class="p-8">
-                <h3 class="text-2xl font-semibold rewrite-text">About Me</h3>
-                <p class="text-slate-600 mt-3 leading-relaxed max-w-3xl">
+                <h3 class="text-2xl font-semibold rewrite-text" data-aos="fade-up">About Me</h3>
+                <p class="text-slate-600 mt-3 leading-relaxed max-w-3xl" data-aos="fade-up" data-aos-delay="100">
                     A results-driven <strong>Full Stack Developer</strong> with practical experience in designing and
                     developing dynamic web applications. Skilled in crafting responsive interfaces and robust back-end
                     systems, with a strong focus on performance, scalability, and clean code. Committed to continuous
@@ -289,10 +346,12 @@
 
 
                 <!-- Education -->
-                <div class="mt-8">
-                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4 rewrite-text">Education</h4>
+                <div class="mt-8" data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4 rewrite-text" data-aos="fade-up">
+                        Education</h4>
                     <div class="space-y-4">
-                        <div class="bg-white rounded-xl p-4 border card-shadow float-up">
+                        <div class="bg-white rounded-xl p-4 border card-shadow float-up" data-aos="fade-right"
+                            data-aos-delay="300">
                             <div class="flex items-center justify-between">
                                 <h5 class="font-semibold text-slate-800">Bachelor’s of Technology in Computer Science
                                     Engineering</h5>
@@ -301,7 +360,7 @@
                             <p class="text-sm text-slate-600 mt-1">Patel College of Science and Technology Bhopal</p>
                         </div>
 
-                        <div class="bg-white rounded-xl p-4 border card-shadow float-up">
+                        <div class="bg-white rounded-xl p-4 border card-shadow float-up" data-aos="fade-left">
                             <div class="flex items-center justify-between">
                                 <h5 class="font-semibold text-slate-800">Higher Secondary (12th)</h5>
                                 <span class="text-sm text-slate-500">2020 - 2021</span>
@@ -309,7 +368,7 @@
                             <p class="text-sm text-slate-600 mt-1">Govt. Model H.S. School Ichhawar</p>
                         </div>
 
-                        <div class="bg-white rounded-xl p-4 border card-shadow float-up">
+                        <div class="bg-white rounded-xl p-4 border card-shadow float-up" data-aos="fade-right">
                             <div class="flex items-center justify-between">
                                 <h5 class="font-semibold text-slate-800">Secondary (10th)</h5>
                                 <span class="text-sm text-slate-500">2018 - 2019</span>
@@ -321,9 +380,11 @@
 
                 <!-- Internships -->
                 <div class="mt-10">
-                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4 rewrite-text">Internships</h4>
+                    <h4 class="text-xl font-semibold text-[color:var(--accent)] mb-4 rewrite-text" data-aos="fade-up">
+                        Internships</h4>
                     <div class="space-y-4">
-                        <div class="bg-white rounded-xl p-4 border card-shadow float-up">
+                        <div class="bg-white rounded-xl p-4 border card-shadow float-up" data-aos="fade-right"
+                            data-aos-delay="300">
                             <div class="flex items-center justify-between">
                                 <h5 class="font-semibold text-slate-800">Java Development Intern — Oasis Infobyte</h5>
                                 <span class="text-sm text-slate-500">15 Dec 2024 – 15 Jan 2025</span>
@@ -332,7 +393,7 @@
                                 logic and application development.</p>
                         </div>
 
-                        <div class="bg-white rounded-xl p-4 border card-shadow float-up">
+                        <div class="bg-white rounded-xl p-4 border card-shadow float-up" data-aos="fade-left">
                             <div class="flex items-center justify-between">
                                 <h5 class="font-semibold text-slate-800">Java Development Intern — Optifyx Technology
                                 </h5>
@@ -342,7 +403,8 @@
                                 real-world software deployment.</p>
                         </div>
 
-                        <div class="bg-white rounded-xl p-4 border card-shadow float-up">
+                        <div class="bg-white rounded-xl p-4 border card-shadow float-up" data-aos="fade-right"
+                            data-aos-delay="100">
                             <div class="flex items-center justify-between">
                                 <h5 class="font-semibold text-slate-800">Full Stack Development Intern — Iveys
                                     Innovations Pvt. Ltd.</h5>
@@ -358,8 +420,9 @@
 
             <!-- Skills -->
             <section id="skills" class="p-8 bg-gray-50">
-                <h3 class="text-2xl font-semibold rewrite-text">Skills</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-center">
+                <h3 class="text-2xl font-semibold rewrite-text" data-aos="fade-up">Skills</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-center" data-aos="fade-up"
+                    data-aos-delay="100">
                     <div
                         class="p-4 bg-white rounded-xl card-shadow float-up hover:bg-[color:var(--accent)] hover:text-white hover:shadow-xl transition-all duration-300">
                         HTML</div>
@@ -400,12 +463,12 @@
 
             <!-- Portfolio -->
             <section id="portfolio" class="p-8">
-                <h3 class="text-2xl font-semibold rewrite-text">Projects</h3>
+                <h3 class="text-2xl font-semibold rewrite-text" data-aos="fade-up">Projects</h3>
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
 
                     <!-- Project 1 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]"
+                        data-aos="fade-right" data-aos-delay="100">
                         <div class="text-sm text-slate-500">Full Stack</div>
                         <div class="font-semibold mt-1">Alumni Wesite</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -420,8 +483,8 @@
                     </div>
 
                     <!-- Project 2 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-left" data-aos-delay="200"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Frontend</div>
                         <div class="font-semibold mt-1">Portfolio Website</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -437,8 +500,8 @@
                     </div>
 
                     <!-- Project 3 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-up" data-aos-delay="300"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Backend</div>
                         <div class="font-semibold mt-1">Employee Management System</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -452,8 +515,8 @@
                     </div>
 
                     <!-- Project 4 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-left" data-aos-delay="400"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Full Stack</div>
                         <div class="font-semibold mt-1">ApnaGhar</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -469,8 +532,8 @@
                     </div>
 
                     <!-- Project 5 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-up" data-aos-delay="500"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Frontend</div>
                         <div class="font-semibold mt-1">Weather Forecast App</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -484,8 +547,8 @@
                     </div>
 
                     <!-- Project 6 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-right" data-aos-delay="600"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Full Stack</div>
                         <div class="font-semibold mt-1">School Website</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -501,8 +564,8 @@
                     </div>
 
                     <!-- Project 7 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-up" data-aos-delay="700"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Backend (Java)</div>
                         <div class="font-semibold mt-1">Online Reservation System</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -518,8 +581,8 @@
                     </div>
 
                     <!-- Project 8 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-left" data-aos-delay="800"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Backend (Java)</div>
                         <div class="font-semibold mt-1">Online Examination System</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -534,8 +597,8 @@
                     </div>
 
                     <!-- Project 9 -->
-                    <div
-                        class="p-5 rounded-2xl bg-white border card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
+                    <div data-aos="fade-up" data-aos-delay="900"
+                        class="neon-border-only p-5 rounded-2xl bg-white card-shadow float-up transition-all duration-300 hover:border-[color:var(--accent)]">
                         <div class="text-sm text-slate-500">Backend (Java)</div>
                         <div class="font-semibold mt-1">ATM System</div>
                         <p class="mt-3 text-sm text-slate-600">
@@ -556,22 +619,24 @@
             <!-- Contact -->
             <section id="contact" class="p-8 bg-[color:var(--glass)] rounded-b-2xl">
                 <h3 class="text-2xl font-semibold rewrite-text">Reach Out!</h3>
-                <p class="text-slate-600 mt-2">Have a project or idea in mind? Let’s make it happen together.</p>
+                <p class="text-slate-600 mt-2" data-aos="fade-up">Have a project or idea in mind? Let’s make it happen
+                    together.</p>
 
-                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="100">
                     <div>
                         <div class="text-sm text-slate-600">Connect directly:</div>
                         <p class="inline-block mt-2 px-4 py-2 rounded bg-[color:var(--accent)] text-white btn-hover">
                             +91 8719967103</p>
                         <p class="inline-block mt-2 px-4 py-2 rounded bg-[color:var(--accent)] text-white btn-hover">
                             akprajapati8719@gmail.com</p>
-                         <p class="inline-block mt-2 px-4 py-2 rounded bg-[color:var(--accent)] text-white btn-hover">
+                        <p class="inline-block mt-2 px-4 py-2 rounded bg-[color:var(--accent)] text-white btn-hover">
                             https://github.com/AkPrajapati8719</p>
-                         <p class="inline-block mt-2 px-4 py-2 rounded bg-[color:var(--accent)] text-white btn-hover">
-                           www.linkedin.com/in/abhishek-prajapati-655a442a8</p>
+                        <p class="inline-block mt-2 px-4 py-2 rounded bg-[color:var(--accent)] text-white btn-hover">
+                            www.linkedin.com/in/abhishek-prajapati-655a442a8</p>
                     </div>
 
-                    <form id="contactForm" class="space-y-3 p-4 bg-white rounded-2xl border">
+                    <form id="contactForm" class="space-y-3 p-4 bg-white rounded-2xl border" data-aos="fade-up"
+                        data-aos-delay="200">
                         <div>
                             <label class="text-sm text-slate-600">Name</label>
                             <input required type="text" id="name" name="from_name"
@@ -664,6 +729,56 @@
         // Apply to all elements with rewrite-text class
         document.querySelectorAll('.rewrite-text').forEach(el => rewriteText(el, 100));
     </script>
+
+    <!-- counter js animation for projects -->
+    <script>
+        function animateCounter(id, endValue, duration = 2000) {
+            let element = document.getElementById(id);
+            let startValue = 0;
+            let startTime = null;
+
+            function updateCounter(timestamp) {
+                if (!startTime) startTime = timestamp;
+
+                let progress = timestamp - startTime;
+                let current = Math.min(
+                    Math.floor((progress / duration) * endValue),
+                    endValue
+                );
+
+                element.textContent = current + "+";
+
+                if (current < endValue) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Trigger when visible on scroll
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounter("projectCounter", 15, 5000);
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.getElementById("projectCounter"));
+    </script>
+
+
+    <!--   Aos Animation -->
+    <!-- Initialize AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1100, // Animation speed
+            once: false,    // Re-animate on scroll
+            offset: 80,     // Trigger offset
+        });
+    </script>
+
 
 
 </body>
